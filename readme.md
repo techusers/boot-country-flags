@@ -18,7 +18,9 @@ This creates DB, tables, user and grants permissions to the user
 Run the application:
 ------------------------- 
 1. From the root folder boot-country-flags run:
+
 	./gradlew clean build
+	
 	java -Xms1024m -Xmx1024m  -jar build/libs/boot-country-flags-0.1.0.jar 
 
 2. Swagger:
@@ -28,7 +30,8 @@ Run the application:
 
 3. Dataload: 
 ------------
-	Load the continents json to mysql table:
+	Load the continents json to mysql table. This step is required before retrieving.
+	
 	POST http://localhost:8080/triggerETL
 	body: {"fullRefresh":true}
 
@@ -46,19 +49,19 @@ REST API end points:
 -------------------------------
 (curl command also provided)
 
-5. Retrieve all flags /flag:
+5. /flag - Retrieve all flags :
 
 	GET http://localhost:8080/flag
 	
 	curl -X GET -i http://localhost:8080/flag
 
-6. To retrieve country flag /fag/country/<countryname>.
+6. /fag/country/<countryname> - To retrieve a country flag.
 
 	GET http://localhost:8080/flag/country/Fiji
 	
 	curl -X GET -i http://localhost:8080/flag/country/Fiji
 
-7. To retrieve flags of all countries in a continent /flag/continent/<continentname>
+7. /flag/continent/<continentname> - To retrieve flags of all countries in a continent
 
 	GET http://localhost:8080/flag/continent/Africa
 	
@@ -121,7 +124,8 @@ Code Review Comments - Self Review:
 
 1. Create a serach criteria end point. For example, POST /flag/search that takes a flag search criteria as input and returns flags of any combination of countries across continents.
 2. Handle different response types. Customize the API to return appropriate HTTP codes.
-2. More unit tests needed and needs more coverage. Even though more functional tests are required in this application since the search service is only a CRUD wrapper.
-3. Customize DB connection pooling. Use persistence api if data model grows.
-4. More edge cases handling and exception handling required.
+3. More unit tests needed and needs more coverage. Even though more functional tests are required in this application since the search service is only a CRUD wrapper.
+4. Customize DB connection pooling. Use persistence api if data model grows.
+5. More edge cases handling and exception handling required.
+6. Dockerize and add dockerfile to the project. Push the docker image to a docker repository.
 
