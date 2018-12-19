@@ -109,23 +109,3 @@ REST API end points:
 
 	Example: curl -X GET -i 'http://localhost:8080/actuator/metrics/jvm.memory.committed'
 
-Architectural Considerations TBD:
----------------------------------
-1. Add authentication/authorization to the APIs
-2. Front end the application instance with a load balancer like nginx for scaling.
-3. Add throttling rules to prevent DOS
-4. Add frequently accessed entries to a cache like Redis, with expiry. Fetch from DB only on a cache miss.
-5. Push the metrics to external time series metrics DB like prometheus or graphite.
-6. Push the logging to a centralized log cluster like splunk or ELK.
-7. Consider a nosql MPP DB like Impala for aggregations, if data size increases tremendously. The countries and flags usecase does not warrant a big data infrastructure.
-
-Code Review Comments - Self Review:
---------------------------------------
-
-1. Create a serach criteria end point. For example, POST /flag/search that takes a flag search criteria as input and returns flags of any combination of countries across continents.
-2. Handle different response types. Customize the API to return appropriate HTTP codes.
-3. More unit tests needed and needs more coverage. Even though more functional tests are required in this application since the search service is only a CRUD wrapper.
-4. Customize DB connection pooling. Use persistence api if data model grows.
-5. More edge cases handling and exception handling required.
-6. Dockerize and add dockerfile to the project. Push the docker image to a docker repository.
-
